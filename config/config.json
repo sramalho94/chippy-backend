@@ -1,0 +1,17 @@
+{
+	"development": {
+		"database": "chippy_development",
+		"host": "127.0.0.1",
+		"dialect": "postgres"
+	},
+	"test": {
+		"database": "chippy_test",
+		"host": "127.0.0.1",
+		"dialect": "postgres"
+	},
+	"production": {
+		"database": "chippy_production",
+		"host": "127.0.0.1",
+		"dialect": "postgres"
+	}
+}
