@@ -11,7 +11,23 @@ module.exports = (sequelize, DataTypes) => {
 			Chip.belongsToMany(models.Location, { 
 				through: models.ChipLocation, 
 				as: 'chips_at_location',
-			foreignKey: 'chipId'});
+				foreignKey: 'chipId'})
+
+			Chip.belongsToMany(models.User, {
+				through: models.Comment,
+				as: 'chip_comments',
+				foreignKey: 'chipId'
+			})
+
+			Chip.belongsToMany(models.User, {
+				through: models.ChipReaction,
+				as: 'chips_reaction',
+				foreignKey: 'chipId'
+			})
+
+			Chip.belongsTo(models.User, {
+				foreignKey: 'userId'
+			})
 		}
 	}
 	Chip.init(
