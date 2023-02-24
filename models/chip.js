@@ -8,7 +8,10 @@ module.exports = (sequelize, DataTypes) => {
 		 * The `models/index` file will call this method automatically.
 		 */
 		static associate(models) {
-			// define association here
+			Chip.belongsToMany(models.Location, { 
+				through: models.ChipLocation, 
+				as: 'chips_at_location',
+			foreignKey: 'chipId'});
 		}
 	}
 	Chip.init(
@@ -39,6 +42,14 @@ module.exports = (sequelize, DataTypes) => {
 			dislikeCount: {
 				type: DataTypes.INTEGER,
 				defaultValue: 0
+			},
+			userId: {
+				type: DataTypes.INTEGER,
+				onDelete: 'CASCADE',
+				references: {
+					model: 'users',
+					key: 'id'
+				}
 			}
 		},
 		{
