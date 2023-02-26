@@ -49,6 +49,16 @@ const GetChipByBrand = async (req, res) => {
 	}
 };
 
+const GetChipByChipName = async (req, res) => {
+	try {
+		const chipName = req.params.chipName;
+		const chips = await Chip.findAll({ where: chipName });
+		res.send(chips);
+	} catch (error) {
+		return res.status(500).json({ error: error.message });
+	}
+};
+
 const CreateChip = async (req, res) => {
 	try {
 		const chip = await Chip.create({ ...req.body });
@@ -87,6 +97,7 @@ module.exports = {
 	GetChipById,
 	GetChipByFlavor,
 	GetChipByBrand,
+	GetChipByChipName,
 	CreateChip,
 	UpdateChip,
 	DeleteChip
