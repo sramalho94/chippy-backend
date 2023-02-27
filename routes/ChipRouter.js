@@ -53,6 +53,4 @@ router.get(
   controller.GetChipsByChipName
 )
 
-
-
 module.exports = router
