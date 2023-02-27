@@ -38,6 +38,11 @@ router.get(
   controller.GetChipById
 )
 
+router.get(
+  ':/flavor',
+  controller.GetChipsByFlavor
+)
+
 
 
 module.exports = router
