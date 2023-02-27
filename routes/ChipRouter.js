@@ -48,6 +48,11 @@ router.get(
   controller.GetChipsByBrand
 )
 
+router.get(
+  ':/chipName',
+  controller.GetChipsByChipName
+)
+
 
 
 module.exports = router
