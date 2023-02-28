@@ -23,6 +23,11 @@ router.delete(
   controller.DeleteChip
 )
 
+router.get(
+  '/',
+  controller.GetAllChips
+)
+
 
 
 
