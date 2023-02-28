@@ -28,7 +28,15 @@ router.get(
   controller.GetAllChips
 )
 
+router.get(
+  '/:userId',
+  controller.GetChipsByUserId
+)
 
+router.get(
+  ':/id',
+  controller.GetChipById
+)
 
 
 
