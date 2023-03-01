@@ -16,7 +16,12 @@ router.put(
   controller.UpdateChip
 )
 
-
+router.delete(
+  '/:chipId',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.DeleteChip
+)
 
 
 
