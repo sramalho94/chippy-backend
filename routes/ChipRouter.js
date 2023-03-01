@@ -9,7 +9,12 @@ router.post(
   controller.CreateChip
 )
 
-
+router.put(
+  '/:chipId',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.UpdateChip
+)
 
 
 
