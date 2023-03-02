@@ -68,6 +68,18 @@ const PostChipLocation = async (req, res) => {
 	}
 };
 
+const UpdateChipLocationById = async (req, res) => {
+	try {
+		const chipLocationId = parseInt(req.params.chipLocationId);
+		const chipLocation = await ChipLocation.update(req.body, {
+			where: { id: chipLocationId },
+			returning: true
+		});
+	} catch (error) {
+		return res.status(500).json({ error: error.message });
+	}
+};
+
 module.exports = {
 	GetChipLocationsByUserId,
 	GetChipLocationsByRegion,
