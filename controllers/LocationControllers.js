@@ -33,8 +33,19 @@ const UpdateLocation = async (req, res) => {
   }
 }
 
+const DeleteLocation = async (req, res) => {
+  try {
+    let locationId = req.params.locationId
+    await Location.destroy({ where: { id: locationId } })
+    res.send({ message: `Deleted location with an id of ${locationId}` })
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
 module.exports = {
   GetLocationsById,
   CreateLocation,
-  UpdateLocation
+  UpdateLocation,
+  DeleteLocation
 }
