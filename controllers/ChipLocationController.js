@@ -1,4 +1,4 @@
-const { ChipLocation, Location } = require('../models');
+const { ChipLocation, Location, Chip } = require('../models');
 
 const GetChipLocationsByUserId = async (req, res) => {
 	try {
@@ -19,6 +19,15 @@ const getChipLocationsByLocationId = async (locationId) => {
 	}
 };
 
+const getChipByChipId = async (id) => {
+	try {
+		const chip = await Chip.findAll({ where: id });
+		return chip;
+	} catch (error) {
+		return res.status(500).json({ error: error.message });
+	}
+};
+
 const GetChipLocationsByRegion = async (req, res) => {
 	try {
 		const region = req.params.region;
@@ -32,12 +41,28 @@ const GetChipLocationsByRegion = async (req, res) => {
 				chipLocations.push(chipLocationsToAdd);
 			})
 		);
-		res.send(chipLocations);
+		const chips = [];
+		await Promise.all(
+			chips.forEach(async (chip) => {
+				const chipsToAdd = await getChipByChipId(chip.chipId);
+				chips.push(chipsToAdd);
+			})
+		);
+		res.send(chips);
+	} catch (error) {
+		return res.status(500).json({ error: error.message });
+	}
+};
+
+const PostChipLocation = async (req, res) => {
+	try {
+		// const
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
 };
 
 module.exports = {
-	GetChipLocationsByUserId
+	GetChipLocationsByUserId,
+	GetChipLocationsByRegion
 };
