@@ -56,7 +56,13 @@ const GetChipLocationsByRegion = async (req, res) => {
 
 const PostChipLocation = async (req, res) => {
 	try {
-		// const
+		const { chipId, userId, locationId } = req.body;
+		const newChipLocation = await ChipLocation.create({
+			chipId,
+			userId,
+			locationId
+		});
+		res.send(newChipLocation);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
@@ -64,5 +70,6 @@ const PostChipLocation = async (req, res) => {
 
 module.exports = {
 	GetChipLocationsByUserId,
-	GetChipLocationsByRegion
+	GetChipLocationsByRegion,
+	PostChipLocation
 };
