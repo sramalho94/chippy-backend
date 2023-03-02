@@ -97,5 +97,6 @@ module.exports = {
 	GetChipLocationsByUserId,
 	GetChipLocationsByRegion,
 	PostChipLocation,
-	UpdateChipLocationById
+	UpdateChipLocationById,
+	DeleteChipLocationById
 };
