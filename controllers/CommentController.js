@@ -1,4 +1,30 @@
-const { Comment } = require('../models')
+const { Comment, Chip, CommentRemark } = require('../models')
+
+const GetAllChipCommentsAndRemarks = async (req, res) => {
+  try {
+    const comments = await Comment.findAll({ 
+      where: { id: req.params.chipId },
+      include: Chip, CommentRemark
+    })
+    res.send(comments)
+  } catch (error) {
+    return res.send(500).json({ error: error.message})
+  }
+}
+
+const PostComment = async (req, res) => {
+  try {
+    const { chipId, userId, comment } = req.body
+    const newComment = await Comment.create({
+      chipId,
+      userId,
+      comment
+    })
+     res.send(newComment)
+  } catch (error) {
+    return res.status(500).json({ error: error.message})
+  }
+}
 
 const UpdateComment = async (req,res) => {
   try {
@@ -37,4 +63,8 @@ const DeleteCommentByChipId = async (req, res) => {
 module.exports = {
 DeleteCommentByChipId,
 DeleteCommentByCommentId,
+UpdateComment,
+PostComment,
+GetAllChipCommentsAndRemarks
+
 }
