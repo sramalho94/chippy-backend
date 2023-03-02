@@ -20,7 +20,21 @@ const CreateLocation = async (req, res) => {
   }
 }
 
+const UpdateLocation = async (req, res) => {
+  try {
+    const locationId = parseInt(req.params.locationId)
+    const updatedLocation = await Location.update(req.body, {
+      where: { id: locationId },
+      returning: true
+    })
+    res.send(updatedLocation)
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
 module.exports = {
   GetLocationsById,
-  CreateLocation
+  CreateLocation,
+  UpdateLocation
 }
