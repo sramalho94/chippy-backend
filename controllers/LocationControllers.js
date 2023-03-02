@@ -1,0 +1,26 @@
+const { Location } = require('../models')
+
+const GetLocationsById = async (req, res) => {
+  try {
+    const locations = await Location.findAll({
+      where: { userId: req.params.userId }
+    })
+    res.send(locations)
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
+const CreateLocation = async (req, res) => {
+  try {
+    const location = await Location.create({ ...req.body })
+    res.send(location)
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
+module.exports = {
+  GetLocationsById,
+  CreateLocation
+}
