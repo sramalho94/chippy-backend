@@ -75,6 +75,19 @@ const UpdateChipLocationById = async (req, res) => {
 			where: { id: chipLocationId },
 			returning: true
 		});
+		res.send(chipLocation);
+	} catch (error) {
+		return res.status(500).json({ error: error.message });
+	}
+};
+
+const DeleteChipLocationById = async (req, res) => {
+	try {
+		const chipLocationId = parseInt(req.params.chipLocationId);
+		await ChipLocation.destroy({ where: { id: chipLocationId } });
+		res.send({
+			message: `Deleted chip location with an id ${chipLocationId}`
+		});
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
@@ -83,5 +96,6 @@ const UpdateChipLocationById = async (req, res) => {
 module.exports = {
 	GetChipLocationsByUserId,
 	GetChipLocationsByRegion,
-	PostChipLocation
+	PostChipLocation,
+	UpdateChipLocationById
 };
