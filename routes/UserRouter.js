@@ -9,6 +9,18 @@ router.get(
   controller.GetUserById
 )
 
+router.put(
+  '/:userId',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.UpdateUser
+)
 
+router.delete(
+  '/:userId',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.DeleteUser
+)
 
 module.exports = router
