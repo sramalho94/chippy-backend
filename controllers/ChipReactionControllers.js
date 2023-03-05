@@ -11,6 +11,18 @@ const GetChipReactionByChipId = async (req, res) => {
   }
 }
 
+const GetChipReactionByUserId = async (req, res) => {
+  try {
+    const chipReaction = await ChipReaction.findAll({
+      where: { userd: req.params.userId }
+    })
+    res.send(chipReaction)
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
 module.exports = {
-  GetChipReactionByChipId
+  GetChipReactionByChipId,
+  GetChipReactionByUserId
 }
