@@ -22,7 +22,22 @@ const GetChipReactionByUserId = async (req, res) => {
   }
 }
 
+const PostChipReaction = async (req, res) => {
+  try {
+    const { chipId, userId, reactionId } = req.body
+    const newChipReaction = await ChipReaction.create({
+      chipId,
+      userId,
+      reactionId
+    })
+    res.send(newChipReaction)
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
 module.exports = {
   GetChipReactionByChipId,
-  GetChipReactionByUserId
+  GetChipReactionByUserId,
+  PostChipReaction
 }
