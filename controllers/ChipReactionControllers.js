@@ -36,8 +36,22 @@ const PostChipReaction = async (req, res) => {
   }
 }
 
+const UpdateChipReaction = async (req, res) => {
+  try {
+    const chipReactionId = parseInt(req.params.chipReactionId)
+    const updatedChipReaction = await ChipReaction.update(req.body, {
+      where: { id: chipReactionId },
+      returning: true
+    })
+    res.send(updatedChipReaction)
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
 module.exports = {
   GetChipReactionByChipId,
   GetChipReactionByUserId,
-  PostChipReaction
+  PostChipReaction,
+  UpdateChipReaction
 }
