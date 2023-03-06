@@ -7,4 +7,11 @@ router.get(
   controller.GetUserAchievementsByUserId
 )
 
+router.post(
+  '/',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.CreateUserAchievement  
+)
+
 module.exports = router
