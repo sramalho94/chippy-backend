@@ -29,7 +29,7 @@ const GetChipById = async (req, res) => {
 	}
 };
 
-const GetChipByFlavor = async (req, res) => {
+const GetChipsByFlavor = async (req, res) => {
 	try {
 		const flavor = req.params.flavor;
 		const chips = await Chip.findAll({ where: flavor });
@@ -39,7 +39,7 @@ const GetChipByFlavor = async (req, res) => {
 	}
 };
 
-const GetChipByBrand = async (req, res) => {
+const GetChipsByBrand = async (req, res) => {
 	try {
 		const brand = req.params.brand;
 		const chips = await Chip.findAll({ where: brand });
@@ -49,7 +49,7 @@ const GetChipByBrand = async (req, res) => {
 	}
 };
 
-const GetChipByChipName = async (req, res) => {
+const GetChipsByChipName = async (req, res) => {
 	try {
 		const chipName = req.params.chipName;
 		const chips = await Chip.findAll({ where: chipName });
@@ -95,9 +95,9 @@ module.exports = {
 	GetAllChips,
 	GetChipsByUserId,
 	GetChipById,
-	GetChipByFlavor,
-	GetChipByBrand,
-	GetChipByChipName,
+	GetChipsByFlavor,
+	GetChipsByBrand,
+	GetChipsByChipName,
 	CreateChip,
 	UpdateChip,
 	DeleteChip
