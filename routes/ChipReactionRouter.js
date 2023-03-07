@@ -20,4 +20,11 @@ router.put(
   controller.UpdateChipReaction
 )
 
+router.delete(
+  '/:chipReactionId',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.DeleteChipReactionByChipReactionId
+)
+
 router.module.exports = router
