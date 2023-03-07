@@ -51,8 +51,31 @@ const CheckSession = async (req, res) => {
   }
 }
 
+const UpdatePassword = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: { username: req.body.username }
+    })
+    if (
+      user &&
+      (await middleware.comparePassword(
+        user.dataValues.passwordDigest,
+        req.body.oldPassword
+      ))
+    ) {
+      let passwordDigest = await middleware.hashPassword(req.body.newPassword)
+      await user.update({ passwordDigest })
+      return res.send({ status: 'Success', msg: 'Password updated' })
+    }
+    res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
 module.exports = {
   Login,
   Register,
-  CheckSession
+  CheckSession,
+  UpdatePassword
 }
