@@ -11,4 +11,11 @@ router.post(
   controller.PostComment
 )
 
+router.put(
+  '/commentId',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.UpdateComment
+)
+
 module.exports = router
