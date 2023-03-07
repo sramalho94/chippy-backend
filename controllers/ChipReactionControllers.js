@@ -49,9 +49,22 @@ const UpdateChipReaction = async (req, res) => {
   }
 }
 
+const DeleteChipReactionByRichReactionId = async (req, res) => {
+  try {
+    const chipReactionId = parseInt(req.params.chipReactionId)
+    await ChipReaction.destroy({ where: { id: chipReactionId } })
+    res.send({
+      message: `Deleted Chip Reaction with an id of ${chipReactionId}`
+    })
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
 module.exports = {
   GetChipReactionByChipId,
   GetChipReactionByUserId,
   PostChipReaction,
-  UpdateChipReaction
+  UpdateChipReaction,
+  DeleteChipReactionByRichReactionId
 }
