@@ -9,7 +9,7 @@ Router.post(
 	middleware.verifyToken,
 	controller.CreateLocation
 );
-Router.post(
+Router.put(
 	'/update',
 	middleware.stripToken,
 	middleware.verifyToken,
