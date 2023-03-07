@@ -49,7 +49,7 @@ const UpdateChipReaction = async (req, res) => {
   }
 }
 
-const DeleteChipReactionByRichReactionId = async (req, res) => {
+const DeleteChipReactionByChipReactionId = async (req, res) => {
   try {
     const chipReactionId = parseInt(req.params.chipReactionId)
     await ChipReaction.destroy({ where: { id: chipReactionId } })
@@ -66,5 +66,5 @@ module.exports = {
   GetChipReactionByUserId,
   PostChipReaction,
   UpdateChipReaction,
-  DeleteChipReactionByRichReactionId
+  DeleteChipReactionByChipReactionId
 }
