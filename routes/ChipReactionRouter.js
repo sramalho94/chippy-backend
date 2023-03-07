@@ -6,6 +6,18 @@ router.get('/chip/:chipId', controller.GetChipReactionByChipId)
 
 router.get('/user/:userId', controller.GetChipReactionByUserId)
 
-router.post('/', controller.PostChipReaction)
+router.post(
+  '/',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.PostChipReaction
+)
+
+router.put(
+  '/:chipReactionId',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.UpdateChipReaction
+)
 
 router.module.exports = router
