@@ -10,28 +10,28 @@ module.exports = (sequelize, DataTypes) => {
 		static associate(models) {
 			User.hasMany(models.Location, {
 				foreignKey: 'userId'
-			})
+			});
 			User.hasMany(models.Chip, {
 				foreignKey: 'userId'
-			})
+			});
 			User.hasMany(models.ChipLocation, {
 				foreignKey: 'userId'
-			})
+			});
 			User.belongsToMany(models.Chip, {
 				through: models.Comment,
 				as: 'user_comments',
 				foreignKey: 'userId'
-			})
-			User.belongsToMany(models.Achievements, {
+			});
+			User.belongsToMany(models.UserAchievements, {
 				through: models.UserAchievements,
 				as: 'user_achievements',
 				foreignKey: 'userId'
-			})
+			});
 			User.belongsToMany(models.Chip, {
 				through: models.ChipReaction,
-				as:'users_reaction',
+				as: 'users_reaction',
 				foreignKey: 'userId'
-			})
+			});
 		}
 	}
 	User.init(

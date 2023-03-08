@@ -1,26 +1,26 @@
-const router = require('express').Router()
-const controller = require('../controllers/UserController')
-const middleware = require('../middleware')
+const router = require('express').Router();
+const controller = require('../controllers/UserController');
+const middleware = require('../middleware');
 
 router.get(
-  '/:userId',
-  middleware.stripToken,
-  middleware.verifyToken,
-  controller.GetUserById
-)
+	'/:userId',
+	middleware.stripToken,
+	middleware.verifyToken,
+	controller.GetUserById
+);
 
 router.put(
-  '/:userId',
-  middleware.stripToken,
-  middleware.verifyToken,
-  controller.UpdateUser
-)
+	'/:userId',
+	middleware.stripToken,
+	middleware.verifyToken,
+	controller.UpdateUser
+);
 
 router.delete(
-  '/:userId',
-  middleware.stripToken,
-  middleware.verifyToken,
-  controller.DeleteUser
-)
+	'/:userId',
+	middleware.stripToken,
+	middleware.verifyToken,
+	controller.DeleteUser
+);
 
-module.exports = router
+module.exports = router;

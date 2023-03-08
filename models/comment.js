@@ -10,14 +10,14 @@ module.exports = (sequelize, DataTypes) => {
 		static associate(models) {
 			Comment.belongsToMany(models.Comment, {
 				through: models.CommentRemark,
-				as: 'comment',
+				as: 'commentPost',
 				foreignKey: 'commentId'
-			})
+			});
 			Comment.belongsToMany(models.Comment, {
 				through: models.CommentRemark,
 				as: 'remark',
 				foreignKey: 'remarkId'
-			})
+			});
 		}
 	}
 	Comment.init(

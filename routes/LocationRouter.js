@@ -21,3 +21,5 @@ Router.delete(
 	middleware.verifyToken,
 	controller.DeleteLocation
 );
+
+module.exports = Router;

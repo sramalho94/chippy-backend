@@ -22,3 +22,5 @@ Router.delete(
 	middleware.verifyToken,
 	controller.DeleteChipLocationById
 );
+
+module.exports = Router;
