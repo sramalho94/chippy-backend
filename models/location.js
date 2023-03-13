@@ -8,14 +8,15 @@ module.exports = (sequelize, DataTypes) => {
 		 * The `models/index` file will call this method automatically.
 		 */
 		static associate(models) {
-			Location.belongsToMany(models.Chip, { 
-				through: models.ChipLocation, 
+			Location.belongsToMany(models.Chip, {
+				through: models.ChipLocation,
 				as: 'chip_locations',
-			foreignKey: 'locationId'});
+				foreignKey: 'locationId'
+			});
 
 			Location.belongsTo(models.User, {
 				foreignKey: 'userId'
-			})
+			});
 		}
 	}
 	Location.init(
