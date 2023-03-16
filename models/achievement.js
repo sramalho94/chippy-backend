@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 				through: models.UserAchievements,
 				as: 'achievement',
 				foreignKey: 'achievementId'
-			})
+			});
 		}
 	}
 	Achievement.init(
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false
 			},
 			description: {
-				type: DataTypes.STRING,
+				type: DataTypes.TEXT,
 				allowNull: false
 			}
 		},
