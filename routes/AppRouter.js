@@ -15,6 +15,6 @@ Router.use('/chip-locations', ChipLocationRouter);
 Router.use('/chip-reactions', ChipReactionRouter);
 Router.use('/comments', CommentRouter);
 Router.use('/locations', LocationRouter);
-Router.use('user-achievements', UserAchievementRouter);
+Router.use('/user-achievements', UserAchievementRouter);
 
 module.exports = Router;

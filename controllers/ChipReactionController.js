@@ -14,7 +14,7 @@ const GetChipReactionByChipId = async (req, res) => {
 const GetChipReactionByUserId = async (req, res) => {
 	try {
 		const chipReaction = await ChipReaction.findAll({
-			where: { userd: req.params.userId }
+			where: { userId: req.params.userId }
 		});
 		res.send(chipReaction);
 	} catch (error) {
