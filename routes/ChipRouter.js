@@ -25,14 +25,14 @@ router.delete(
 
 router.get('/', controller.GetAllChips);
 
-router.get('/:userId', controller.GetChipsByUserId);
+router.get('/user/:userId', controller.GetChipsByUserId);
 
-router.get('/:id', controller.GetChipById);
+router.get('/chip/:id', controller.GetChipById);
 
-router.get('/:flavor', controller.GetChipsByFlavor);
+router.get('/flavor/:flavor', controller.GetChipsByFlavor);
 
-router.get('/:brand', controller.GetChipsByBrand);
+router.get('/brand/:brand', controller.GetChipsByBrand);
 
-router.get('/:chipName', controller.GetChipsByChipName);
+router.get('/chip-name/:chipName', controller.GetChipsByChipName);
 
 module.exports = router;
