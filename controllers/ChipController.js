@@ -31,8 +31,9 @@ const GetChipById = async (req, res) => {
 
 const GetChipsByFlavor = async (req, res) => {
 	try {
-		const flavor = req.params.flavor;
-		const chips = await Chip.findAll({ where: flavor });
+		const chips = await Chip.findAll({
+			where: { flavor: req.params.flavor }
+		});
 		res.send(chips);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
@@ -41,8 +42,9 @@ const GetChipsByFlavor = async (req, res) => {
 
 const GetChipsByBrand = async (req, res) => {
 	try {
-		const brand = req.params.brand;
-		const chips = await Chip.findAll({ where: brand });
+		const chips = await Chip.findAll({
+			where: { brand: req.params.brand }
+		});
 		res.send(chips);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
@@ -51,8 +53,9 @@ const GetChipsByBrand = async (req, res) => {
 
 const GetChipsByChipName = async (req, res) => {
 	try {
-		const chipName = req.params.chipName;
-		const chips = await Chip.findAll({ where: chipName });
+		const chips = await Chip.findAll({
+			where: { chipName: req.params.chipName }
+		});
 		res.send(chips);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
