@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
 				as: 'user_comments',
 				foreignKey: 'userId'
 			});
-			User.belongsToMany(models.UserAchievements, {
+			User.belongsToMany(models.Achievement, {
 				through: models.UserAchievements,
 				as: 'user_achievements',
 				foreignKey: 'userId'
