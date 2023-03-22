@@ -1,11 +1,16 @@
-const { UserAchievements, User, Achievements } = require('../models');
+const { UserAchievements, User, Achievement } = require('../models');
 
 const GetUserAchievementsByUserId = async (req, res) => {
 	try {
-		const userAchievements = await UserAchievements.findAll({
-			where: { userId: req.params.userId },
-			include: User,
-			Achievements
+		const userAchievements = await User.findAll({
+			where: {id: req.params.userId},
+			include: [
+				{
+					model: Achievement,
+					as: 'user_achievements',
+					through: { attributes: []}
+				}
+			]
 		});
 		res.send(userAchievements);
 	} catch (error) {
