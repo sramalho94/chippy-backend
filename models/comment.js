@@ -18,6 +18,14 @@ module.exports = (sequelize, DataTypes) => {
 				as: 'remark',
 				foreignKey: 'remarkId'
 			});
+			Comment.belongsTo(models.User, {
+				foreignKey: 'userId',
+				as: 'user'
+			});
+			Comment.belongsTo(models.Chip, {
+				foreignKey: 'chipId',
+				as: 'chip'
+			});
 		}
 	}
 	Comment.init(

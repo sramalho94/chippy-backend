@@ -1,4 +1,4 @@
-const { Comment, Chip, CommentRemark } = require('../models');
+const { Comment, Chip, CommentRemark, User } = require('../models');
 
 const GetAllChipCommentsAndRemarks = async (req, res) => {
 	try {
@@ -9,12 +9,17 @@ const GetAllChipCommentsAndRemarks = async (req, res) => {
 					model: Comment,
 					as: 'remark',
 					through: { attributes: [] }
+				},
+				{
+					model: User, // Include the User model
+					as: 'user', // Give it an alias
+					attributes: ['id', 'username', 'firstName', 'lastName'] // Specify the attributes you want to include
 				}
 			]
 		});
 		res.send(comments);
 	} catch (error) {
-		return res.send(500).json({ error: error.message });
+		return res.status(500).json({ error: error.message });
 	}
 };
 
@@ -55,18 +60,7 @@ const DeleteCommentByCommentId = async (req, res) => {
 	}
 };
 
-// const DeleteCommentByChipId = async (req, res) => {
-//   try {
-//     let chipId = parseInt(req.params.chipId)
-//     await Comment.destroy({ where: {chipId: chipId}})
-//     res.send({ message: `Deleted comment with a chip id of ${chipId}`})
-//   } catch (error) {
-//     return res.status(500).json({ error: error.message})
-//   }
-// }
-
 module.exports = {
-	// DeleteCommentByChipId,
 	DeleteCommentByCommentId,
 	UpdateComment,
 	PostComment,
