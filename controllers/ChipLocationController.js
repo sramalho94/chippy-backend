@@ -23,45 +23,23 @@ const GetChipLocationsByUserId = async (req, res) => {
   }
 }
 
-const getChipLocationsByLocationId = async (locationId) => {
-  try {
-    const chipLocations = await ChipLocation.findAll({ where: locationId })
-    return chipLocations
-  } catch (error) {
-    return res.status(500).json({ error: error.message })
-  }
-}
-
-const getChipByChipId = async (id) => {
-  try {
-    const chip = await Chip.findAll({ where: id })
-    return chip
-  } catch (error) {
-    return res.status(500).json({ error: error.message })
-  }
-}
-
 const GetChipLocationsByRegion = async (req, res) => {
   try {
     const region = req.params.region
-    const locations = await Location.findAll({ where: region })
-    const chipLocations = []
-    await Promise.all(
-      locations.forEach(async (location) => {
-        const chipLocationsToAdd = await getChipLocationsByLocationId(
-          location.id
-        )
-        chipLocations.push(chipLocationsToAdd)
-      })
-    )
-    const chips = []
-    await Promise.all(
-      chips.forEach(async (chip) => {
-        const chipsToAdd = await getChipByChipId(chip.chipId)
-        chips.push(chipsToAdd)
-      })
-    )
-    res.send(chips)
+    const chipLocations = await Location.findAll({
+      where: { region: region },
+      include: [
+        {
+          model: Chip,
+          as: 'chip_locations',
+          through: {
+            attributes: []
+          },
+          required: true
+        }
+      ]
+    })
+    res.send(chipLocations)
   } catch (error) {
     return res.status(500).json({ error: error.message })
   }
