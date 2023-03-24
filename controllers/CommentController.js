@@ -4,6 +4,14 @@ const GetAllChipCommentsAndRemarks = async (req, res) => {
 	try {
 		const comments = await Comment.findAll({
 			where: { chipId: req.params.chipId },
+			attributes: [
+				'id',
+				'chipId',
+				'userId',
+				'comment',
+				'createdAt',
+				'updatedAt'
+			],
 			include: [
 				{
 					model: Comment,
