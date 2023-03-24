@@ -30,6 +30,12 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Comment.init(
 		{
+			id: {
+				allowNull: false,
+				autoIncrement: true,
+				primaryKey: true,
+				type: DataTypes.INTEGER
+			},
 			userId: {
 				type: DataTypes.INTEGER,
 				onDelete: 'CASCADE',
@@ -54,7 +60,17 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			sequelize,
 			modelName: 'Comment',
-			tableName: 'comments'
+			tableName: 'comments',
+			defaultScope: {
+				attributes: [
+					'id',
+					'chipId',
+					'userId',
+					'comment',
+					'createdAt',
+					'updatedAt'
+				]
+			}
 		}
 	);
 	return Comment;
