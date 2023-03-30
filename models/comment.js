@@ -1,6 +1,7 @@
-'use strict';
-const { Model } = require('sequelize');
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
+
 	class Comment extends Model {
 		/**
 		 * Helper method for defining associations.
@@ -75,3 +76,4 @@ module.exports = (sequelize, DataTypes) => {
 	);
 	return Comment;
 };
+
