@@ -12,7 +12,7 @@ const GetAllChips = async (req, res) => {
 const GetChipsByUserId = async (req, res) => {
   try {
     const chips = await Chip.findAll({
-      where: { userId: req.params.userId }
+      where: { userId: req.params.UserId }
     })
     res.send(chips)
   } catch (error) {
