@@ -1,6 +1,7 @@
 'use strict'
 const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
+
   class Chip extends Model {
     /**
      * Helper method for defining associations.
@@ -30,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
         as: 'chips_reaction',
         foreignKey: 'chipId'
       })
+      Chip.hasMany(models.Comment, {
+				foreignKey: 'chipId',
+				as: 'comments'
+			});
     }
   }
   Chip.init(
@@ -78,3 +83,4 @@ module.exports = (sequelize, DataTypes) => {
   )
   return Chip
 }
+
