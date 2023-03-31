@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  app_development:
+    build: .
+    command: sh -c './wait-for-postgres.sh db_development '\''npm run migrate:dev && npm run start:dev'\'''
+    ports:
+      - '3001:3000'
+    environment:
+      - NODE_ENV=development
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
+      - DB_HOST=db_development
+    depends_on:
+      - db_development
+
+  app_test:
+    build: .
+    command: sh -c "./wait-for-postgres.sh db_test && npm run migrate:test && npm test"
+    environment:
+      - NODE_ENV=test
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
+    depends_on:
+      - db_test
+
+  app_production:
+    build: .
+    command: sh -c "npm run migrate:prod && npm start"
+    environment:
+      - NODE_ENV=production
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
+    depends_on:
+      - db_production
+
+  db_development:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=chippy_development
+    ports:
+      - '5432:5432'
+
+  db_test:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=chippy_test
+
+  db_production:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=chippy_production
