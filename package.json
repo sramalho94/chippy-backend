@@ -1,72 +1,41 @@
 {
-
   "name": "chippy-backend",
-
   "version": "1.0.0",
-
   "description": "",
-
   "main": "server.js",
-
   "scripts": {
-
     "test": "jest --detectOpenHandles",
-
-    "start": "node startServer.js"
-
+    "start": "node startServer.js",
+    "migrate:dev": "sequelize db:migrate --env development",
+    "migrate:test": "sequelize db:migrate --env test",
+    "migrate:prod": "sequelize db:migrate --env production",
+    "start:dev": "sequelize db:migrate --env development && npm start"
   },
-
   "repository": {
-
     "type": "git",
-
     "url": "git+https://github.com/sramalho94/chippy-backend.git"
-
   },
-
   "keywords": [],
-
   "author": "",
-
   "license": "ISC",
-
   "bugs": {
-
     "url": "https://github.com/sramalho94/chippy-backend/issues"
-
   },
-
   "homepage": "https://github.com/sramalho94/chippy-backend#readme",
-
   "dependencies": {
-
     "@ngneat/falso": "^6.4.0",
-
-    "bcrypt": "^5.1.0",
-
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-
     "dotenv": "^16.0.3",
-
     "express": "^4.18.2",
-
     "jsonwebtoken": "^9.0.0",
-
     "pg": "^8.9.0",
-
     "sequelize": "^6.28.1"
-
   },
-
   "devDependencies": {
-
     "jest": "^29.5.0",
-
     "nodemon": "^2.0.22",
-
-    "supertest": "^6.3.3"
-
+    "supertest": "^6.3.3",
+    "sequelize-cli": "^6.3.0"
   }
-
 }
-
