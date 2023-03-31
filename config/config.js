@@ -12,14 +12,14 @@ module.exports = {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: 'chippy_test',
-    host: 'db_test',
+    host: process.env.DB_HOST,
     dialect: 'postgres'
   },
   production: {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: 'chippy_production',
-    host: 'db_production',
+    host: process.env.DB_HOST,
     dialect: 'postgres'
   }
 }
