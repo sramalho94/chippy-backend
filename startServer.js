@@ -1,6 +1,6 @@
 const app = require('./server')
 const { execSync } = require('child_process')
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3000
 
 if (process.env.NODE_ENV === 'test') {
   try {
