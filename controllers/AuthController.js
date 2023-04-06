@@ -21,7 +21,7 @@ const Login = async (req, res) => {
 				lastName: user.lastName
 			};
 			let token = middleware.createToken(payload);
-			return res.send({ user: payload, token });
+			return res.status(200).send({ user: payload, token });
 		}
 		res.status(401).send({ status: 'Error', msg: 'Unauthorized' });
 	} catch (error) {
@@ -39,7 +39,7 @@ const Register = async (req, res) => {
 			firstName,
 			lastName
 		});
-		res.send(user);
+		res.status(200).send(user);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
