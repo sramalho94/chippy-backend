@@ -10,7 +10,8 @@
     "migrate:dev": "sequelize db:migrate --env development",
     "migrate:test": "sequelize db:migrate --env test",
     "migrate:prod": "sequelize db:migrate --env production",
-    "start:dev": "sequelize db:migrate --env development && npm start"
+    "start:dev": "sequelize db:migrate --env development && npm start",
+    "start:prod": "sequelize db:migrate --env production && sequelize db:seed:all --env production && node startServer.js"
   },
   "repository": {
     "type": "git",
