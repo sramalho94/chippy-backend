@@ -3,8 +3,6 @@ const request = require('supertest');
 const app = require('../server');
 const {createToken,hashPassword}=require('../middleware');
 const {User}=require('../models');
-const { ExpandCircleDownTwoTone } = require('@mui/icons-material');
-
 
 
 describe('User controller test',()=>{
@@ -43,6 +41,31 @@ describe('User controller test',()=>{
         expect(response.body.firstName).toBe('testName')
         expect(response.body.lastName).toBe('coolRanch')
         
+    })
+
+    test('update user', async()=>{
+        const response = await request(app)
+        .put(`/api/users/${testUserId}`)
+        .set('Authorization', `Bearer ${testToken}`)
+        .send({
+            username: 'update username',
+            lastName: 'update lastName',
+            firstName: 'update firstName'
+        })
+
+        expect(response.statusCode).toBe(200)
+        expect(response.body[1][0].username).toBe('update username')
+        expect(response.body[1][0].lastName).toBe('update lastName')
+        expect(response.body[1][0].firstName).toBe('update firstName')
+
+    })
+
+    test('delete user', async()=>{
+        const response = await request(app)
+        .delete(`/api/users/${testUserId}`)
+        .set('Authorization', `Bearer ${testToken}`)
+        expect(response.statusCode).toBe(200)
+        expect(response.body.message).toBe(`Deleted user with an id of ${testUserId}`)
     })
 
     afterAll(async ()=>{
