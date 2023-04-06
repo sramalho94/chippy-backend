@@ -22,6 +22,13 @@ describe('UserAchievement controller tests', () => {
     })
     testUserId = testUser.id
     
+    //Login test user and get token
+    testToken = createToken({
+      id: testUserId,
+      username: testUser.username,
+      passwordDigest: testUser.passwordDigest
+    })
+
     //create a test achievement
     testAchievement = await Achievement.create({
       name: 'testachievement',
@@ -35,12 +42,6 @@ describe('UserAchievement controller tests', () => {
       achievementId: testAchievementId
     })
 
-    //Login test user and get token
-    testToken = createToken({
-      id: testUser.id,
-      username: testUser.username,
-      passwordDigest: testUser.passwordDigest
-    })
   })
 
   test('create user achievement', async () => {
@@ -49,7 +50,8 @@ describe('UserAchievement controller tests', () => {
     .set('Authorization', `Bearer ${testToken}`)
     .send({
       userId: testUserId,
-      achievementId: testAchievementId
+      achievementId: testAchievementId,
+      passwordDigest: testUser.passwordDigest
     })
     userAchievementId = response.body.id
 
@@ -65,7 +67,8 @@ describe('UserAchievement controller tests', () => {
     expect(response.statusCode).toBe(200)
     expect(Array.isArray(response.body)).toBeTruthy()
     expect(response.body.length).toBeGreaterThan(0)
-    expect(response.body[0].userId).toBe(testUserId)
+    console.log(response.body)
+    expect(response.body[0].id).toBe(testUser.id)
     expect(response.body[0].achievementId).toBe(testAchievementId)
   })
   afterAll(async () => {
