@@ -67,9 +67,9 @@ describe('UserAchievement controller tests', () => {
     expect(response.statusCode).toBe(200)
     expect(Array.isArray(response.body)).toBeTruthy()
     expect(response.body.length).toBeGreaterThan(0)
-    console.log(response.body)
     expect(response.body[0].id).toBe(testUser.id)
-    expect(response.body[0].achievementId).toBe(testAchievementId)
+    console.log(response.body[0].user_achievements[0])
+    expect(response.body[0].user_achievements[0].id).toBe(testAchievement.id)
   })
   afterAll(async () => {
     try {
