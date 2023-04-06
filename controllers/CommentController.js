@@ -25,7 +25,7 @@ const GetAllChipCommentsAndRemarks = async (req, res) => {
 				}
 			]
 		});
-		res.send(comments);
+		res.status(200).send(comments);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
@@ -39,7 +39,7 @@ const PostComment = async (req, res) => {
 			userId,
 			comment
 		});
-		res.send(newComment);
+		res.status(201).send(newComment);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
@@ -52,7 +52,7 @@ const UpdateComment = async (req, res) => {
 			where: { id: commentId },
 			returning: true
 		});
-		res.send(updatedComment);
+		res.status(200).send(updatedComment);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
@@ -62,7 +62,9 @@ const DeleteCommentByCommentId = async (req, res) => {
 	try {
 		const commentId = parseInt(req.params.commentId);
 		await Comment.destroy({ where: { id: commentId } });
-		res.send({ message: `Deleted comment with an id of ${commentId}` });
+		res.status(200).send({
+			message: `Deleted comment with an id of ${commentId}`
+		});
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
