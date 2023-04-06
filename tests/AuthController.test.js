@@ -4,7 +4,7 @@ const app = require('../server');
 const { createToken, hashPassword } = require('../middleware');
 const { User } = require('../models');
 
-describe('User controller test', () => {
+describe('Auth controller test', () => {
 	let testUser;
 	let testToken;
 
