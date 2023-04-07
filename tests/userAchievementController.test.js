@@ -14,14 +14,13 @@ describe('UserAchievement controller tests', () => {
   let testUser
   let testUserId
   beforeAll(async () => {
-
     //create a test user
     testUser = await User.create({
       username: 'testuser',
       passwordDigest: await hashPassword('testpassword')
     })
     testUserId = testUser.id
-    
+
     //Login test user and get token
     testToken = createToken({
       id: testUserId,
@@ -36,33 +35,27 @@ describe('UserAchievement controller tests', () => {
       description: 'testDescription'
     })
     testAchievementId = testAchievement.id
-    
-    testUserAchievement = await UserAchievements.create({
-      userId: testUserId,
-      achievementId: testAchievementId
-    })
-
   })
 
   test('create user achievement', async () => {
     const response = await request(app)
-    .post('/api/user-achievements')
-    .set('Authorization', `Bearer ${testToken}`)
-    .send({
-      userId: testUserId,
-      achievementId: testAchievementId,
-      passwordDigest: testUser.passwordDigest
-    })
+      .post('/api/user-achievements/')
+      .set('Authorization', `Bearer ${testToken}`)
+      .send({
+        userId: testUserId,
+        achievementId: testAchievementId
+      })
     userAchievementId = response.body.id
 
-    expect(response.statusCode).toBe(200)
+    expect(response.statusCode).toBe(201)
     expect(response.body.userId).toBe(testUserId)
     expect(response.body.achievementId).toBe(testAchievementId)
   })
 
   test('get user achievements by user id', async () => {
-    const response = await request(app)
-    .get(`/api/user-achievements/${testUserId}`)
+    const response = await request(app).get(
+      `/api/user-achievements/${testUserId}`
+    )
     console.log(response)
     expect(response.statusCode).toBe(200)
     expect(Array.isArray(response.body)).toBeTruthy()
@@ -72,10 +65,10 @@ describe('UserAchievement controller tests', () => {
   })
   afterAll(async () => {
     try {
-      await User.destroy({truncate: { cascade: true}})
-      await Achievement.destroy({ truncate: { cascade: true}})
-      await UserAchievements.destroy({ truncate: { cascade: true}})
-    } catch(error) {
+      await User.destroy({ truncate: { cascade: true } })
+      await Achievement.destroy({ truncate: { cascade: true } })
+      await UserAchievements.destroy({ truncate: { cascade: true } })
+    } catch (error) {
       console.error('Error cleaning up test data:', error)
     }
   })

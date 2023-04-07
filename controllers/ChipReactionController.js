@@ -5,7 +5,7 @@ const GetChipReactionByChipId = async (req, res) => {
 		const chipReaction = await ChipReaction.findAll({
 			where: { chipId: req.params.chipId }
 		});
-		res.send(chipReaction);
+		res.status(200).send(chipReaction);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
@@ -16,7 +16,7 @@ const GetChipReactionByUserId = async (req, res) => {
 		const chipReaction = await ChipReaction.findAll({
 			where: { userId: req.params.userId }
 		});
-		res.send(chipReaction);
+		res.status(200).send(chipReaction);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
@@ -30,7 +30,7 @@ const PostChipReaction = async (req, res) => {
 			userId,
 			reactionId
 		});
-		res.send(newChipReaction);
+		res.status(201).send(newChipReaction);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
@@ -43,7 +43,7 @@ const UpdateChipReaction = async (req, res) => {
 			where: { id: chipReactionId },
 			returning: true
 		});
-		res.send(updatedChipReaction);
+		res.status(200).send(updatedChipReaction);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
@@ -53,7 +53,7 @@ const DeleteChipReactionByChipReactionId = async (req, res) => {
 	try {
 		const chipReactionId = parseInt(req.params.chipReactionId);
 		await ChipReaction.destroy({ where: { id: chipReactionId } });
-		res.send({
+		res.status(200).send({
 			message: `Deleted Chip Reaction with an id of ${chipReactionId}`
 		});
 	} catch (error) {

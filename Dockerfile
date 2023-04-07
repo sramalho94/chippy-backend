@@ -20,4 +20,4 @@ RUN chmod +x /usr/local/bin/wait-for-postgres.sh
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "wait-for-postgres.sh db_development && npm run start:dev"]
+CMD ["sh", "-c", "wait-for-postgres.sh $DB_HOST && npm run start:$NODE_ENV"]

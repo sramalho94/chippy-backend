@@ -1,0 +1,55 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "app_production",
+      "image": "sramalho94/chippy-backend:latest",
+      "essential": true,
+      "memory": 256,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 3000
+        }
+      ],
+      "environment": [
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "DB_USERNAME",
+          "value": "postgres"
+        },
+        {
+          "name": "DB_PASSWORD",
+          "value": "password"
+        },
+        {
+          "name": "DB_HOST",
+          "value": "db_production"
+        }
+      ]
+    },
+    {
+      "name": "db_production",
+      "image": "postgres:latest",
+      "essential": true,
+      "memory": 256,
+      "environment": [
+        {
+          "name": "POSTGRES_USER",
+          "value": "postgres"
+        },
+        {
+          "name": "POSTGRES_PASSWORD",
+          "value": "password"
+        },
+        {
+          "name": "POSTGRES_DB",
+          "value": "chippy_production"
+        }
+      ]
+    }
+  ]
+}

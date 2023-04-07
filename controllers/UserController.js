@@ -3,7 +3,7 @@ const { User } = require('../models');
 const GetUserById = async (req, res) => {
 	try {
 		const user = await User.findOne({ where: { id: req.params.userId } });
-		res.send(user);
+		res.status(200).send(user);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
@@ -16,7 +16,7 @@ const UpdateUser = async (req, res) => {
 			where: { id: userId },
 			returning: true
 		});
-		res.send(updatedUser);
+		res.status(200).send(updatedUser);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
@@ -26,7 +26,7 @@ const DeleteUser = async (req, res) => {
 	try {
 		let userId = req.params.userId;
 		await User.destroy({ where: { id: userId } });
-		res.send({ message: `Deleted user with an id of ${userId}` });
+		res.status(200).send({ message: `Deleted user with an id of ${userId}` });
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}

@@ -4,7 +4,7 @@ const app = require('../server');
 const { createToken, hashPassword } = require('../middleware');
 const { User } = require('../models');
 
-describe('User controller test', () => {
+describe('Auth controller test', () => {
 	let testUser;
 	let testToken;
 
@@ -18,7 +18,7 @@ describe('User controller test', () => {
 
 		testUser = response.body;
 
-		expect(response.statusCode).toBe(200);
+		expect(response.statusCode).toBe(201);
 		expect(testUser.username).toBe('testuser');
 		expect(testUser.firstName).toBe('test');
 		expect(testUser.lastName).toBe('user');
@@ -36,7 +36,7 @@ describe('User controller test', () => {
 
 		testToken = response.body.token;
 
-		expect(response.statusCode).toBe(200);
+		expect(response.statusCode).toBe(201);
 		expect(response.body).toHaveProperty('token');
 		expect(response.body.user.username).toBe('testuser');
 		expect(response.body.user.firstName).toBe('test');
@@ -49,6 +49,7 @@ describe('User controller test', () => {
 			.get('/api/auth/session')
 			.set('Authorization', `Bearer ${testToken}`);
 
+		expect(response.statusCode).toBe(200);
 		expect(response).toHaveProperty('body');
 	});
 

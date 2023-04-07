@@ -21,7 +21,7 @@ const Login = async (req, res) => {
 				lastName: user.lastName
 			};
 			let token = middleware.createToken(payload);
-			return res.status(200).send({ user: payload, token });
+			return res.status(201).send({ user: payload, token });
 		}
 		res.status(401).send({ status: 'Error', msg: 'Unauthorized' });
 	} catch (error) {
@@ -39,7 +39,7 @@ const Register = async (req, res) => {
 			firstName,
 			lastName
 		});
-		res.status(200).send(user);
+		res.status(201).send(user);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
@@ -48,7 +48,7 @@ const Register = async (req, res) => {
 const CheckSession = async (req, res) => {
 	try {
 		const { payload } = res.locals;
-		res.send(payload);
+		res.status(200).send(payload);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
@@ -70,7 +70,9 @@ const UpdatePassword = async (req, res) => {
 				req.body.newPassword
 			);
 			await user.update({ passwordDigest });
-			return res.send({ status: 'Success', msg: 'Password updated' });
+			return res
+				.status(200)
+				.send({ status: 'Success', msg: 'Password updated' });
 		}
 		res.status(401).send({ status: 'Error', msg: 'Unauthorized' });
 	} catch (error) {
