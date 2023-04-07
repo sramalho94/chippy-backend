@@ -7,7 +7,6 @@ const { UserAchievements, User, Achievement } = require('../models')
 let testToken
 
 describe('UserAchievement controller tests', () => {
-  let testUserAchievement
   let userAchievementId
   let testAchievement
   let testAchievementId

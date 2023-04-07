@@ -1,5 +1,14 @@
 const { Achievement } = require('../models')
 
+const GetAllAchievements = async (req, res) => {
+  try {
+    const achievements = await Achievement.findAll({});
+    res.status(200).send(achievements);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
+
 const CreateAchievement = async (req, res) => {
   try {
     const achievement = await Achievement.create({ ...req.body })
@@ -11,7 +20,7 @@ const CreateAchievement = async (req, res) => {
 
 const UpdateAchievement = async (req, res) => {
   try {
-    const achievementId = parseInt(req.params.chipId)
+    const achievementId = parseInt(req.params.achievementId)
     const updatedAchievement = await Achievement.update(req.body, {
       where: { id: achievementId },
       returning: true
@@ -33,6 +42,7 @@ const DeleteAchievement = async (req, res) => {
 }
 
 module.exports = {
+  GetAllAchievements,
   CreateAchievement,
   UpdateAchievement,
   DeleteAchievement

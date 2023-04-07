@@ -2,6 +2,7 @@ const Router = require('express').Router();
 const AuthRouter = require('./AuthRouter');
 const UserRouter = require('./UserRouter');
 const ChipRouter = require('./ChipRouter');
+const AchievementRouter = require('./AchievementRouter')
 const ChipLocationRouter = require('./ChipLocationRouter');
 const ChipReactionRouter = require('./ChipReactionRouter');
 const CommentRouter = require('./CommentRouter');
@@ -16,5 +17,6 @@ Router.use('/chip-reactions', ChipReactionRouter);
 Router.use('/comments', CommentRouter);
 Router.use('/locations', LocationRouter);
 Router.use('/user-achievements', UserAchievementRouter);
+Router.use('/achievements', AchievementRouter)
 
 module.exports = Router;
