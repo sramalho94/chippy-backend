@@ -21,16 +21,18 @@ services:
       - NODE_ENV=test
       - DB_USERNAME=postgres
       - DB_PASSWORD=password
+      - DB_HOST=db_test
     depends_on:
       - db_test
 
   app_production:
     build: .
-    command: sh -c "npm run migrate:prod && npm start"
+    command: sh -c './wait-for-postgres.sh db_production && npm run migrate:prod && npm run seed:prod && npm start'
     environment:
       - NODE_ENV=production
       - DB_USERNAME=postgres
       - DB_PASSWORD=password
+      - DB_HOST=db_production
     depends_on:
       - db_production
 
