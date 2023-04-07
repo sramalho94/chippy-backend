@@ -20,7 +20,7 @@ const CreateAchievement = async (req, res) => {
 
 const UpdateAchievement = async (req, res) => {
   try {
-    const achievementId = parseInt(req.params.chipId)
+    const achievementId = parseInt(req.params.achievementId)
     const updatedAchievement = await Achievement.update(req.body, {
       where: { id: achievementId },
       returning: true

@@ -30,7 +30,7 @@ describe('Achievement controller tests', () => {
 
   test('create achievement', async () => {
     const response = await request(app)
-    post('/api/achievements')
+    .post('/api/achievements')
     .set('Authorization', `Bearer ${testToken}`)
     .send({
       name: 'test achievement',
@@ -51,6 +51,27 @@ describe('Achievement controller tests', () => {
     expect(response.statusCode).toBe(200);
     expect(Array.isArray(response.body)).toBeTruthy();
     expect(response.body.length).toBeGreaterThan(0)
+  });
+
+  test('update achievement', async () => {
+    const response = await request(app)
+    .put(`/api/achievements/${achievementId}`)
+    .set('Authorization', `Bearer ${testToken}`)
+    .send({
+      name: 'UPDATED TEST ACHIEVEMENT'
+    });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body[1][0].name).toBe('UPDATED TEST ACHIEVEMENT');
+  });
+
+  test('delete achievement', async () => {
+    const response = await request(app)
+    .delete(`/api/achievements/${achievementId}`)
+    .set('Authorization', `Bearer ${testToken}`);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body.message).toBe(`Deleted achievement with an id of ${achievementId}`)
   });
 
   afterAll(async () => {
