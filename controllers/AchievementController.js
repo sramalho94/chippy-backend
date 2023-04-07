@@ -1,5 +1,14 @@
 const { Achievement } = require('../models')
 
+const GetAllAchievements = async (req, res) => {
+  try {
+    const achievements = await Achievement.findAll({});
+    res.status(200).send(achievements);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
+
 const CreateAchievement = async (req, res) => {
   try {
     const achievement = await Achievement.create({ ...req.body })
@@ -33,6 +42,7 @@ const DeleteAchievement = async (req, res) => {
 }
 
 module.exports = {
+  GetAllAchievements,
   CreateAchievement,
   UpdateAchievement,
   DeleteAchievement
