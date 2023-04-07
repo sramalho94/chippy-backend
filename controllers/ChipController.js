@@ -65,7 +65,7 @@ const GetChipsByChipName = async (req, res) => {
 const CreateChip = async (req, res) => {
   try {
     const chip = await Chip.create({ ...req.body })
-    res.status(200).send(chip)
+    res.status(201).send(chip)
   } catch (error) {
     return res.status(500).json({ error: error.message })
   }
