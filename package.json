@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest --detectOpenHandles",
     "seed:dev": "sequelize db:seed:all --env development",
+    "seed:prod": "sequelize db:seed:all --env production",
     "start": "node startServer.js",
     "migrate:dev": "sequelize db:migrate --env development",
     "migrate:test": "sequelize db:migrate --env test",
