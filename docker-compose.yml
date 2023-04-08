@@ -4,6 +4,7 @@ services:
   app_development:
     build: .
     command: sh -c './wait-for-postgres.sh db_development && npm run migrate:dev && npm run seed:dev && npm run start:dev'
+    env_file: .env.docker.development
     ports:
       - '3001:3000'
     environment:
@@ -17,17 +18,20 @@ services:
   app_test:
     build: .
     command: sh -c "./wait-for-postgres.sh db_test && npm run migrate:test && npm test"
+    env_file: .env.docker.test
     environment:
       - NODE_ENV=test
       - DB_USERNAME=postgres
       - DB_PASSWORD=password
       - DB_HOST=db_test
+      - DB_HOST_TEST=db_test
     depends_on:
       - db_test
 
   app_production:
     build: .
     command: sh -c './wait-for-postgres.sh db_production && npm run migrate:prod && npm run seed:prod && npm start'
+    env_file: .env.docker.production
     environment:
       - NODE_ENV=production
       - DB_USERNAME=postgres

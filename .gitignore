@@ -1,5 +1,9 @@
 node_modules 
 .env
+.env.docker.test
+.env.docker.development
+.env.docker.production
+.env.local
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
