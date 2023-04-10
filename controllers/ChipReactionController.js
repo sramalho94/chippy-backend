@@ -1,4 +1,4 @@
-const { ChipReaction } = require('../models');
+const { ChipReaction, Chip } = require('../models');
 
 const GetChipReactionByChipId = async (req, res) => {
 	try {
@@ -30,6 +30,14 @@ const PostChipReaction = async (req, res) => {
 			userId,
 			reactionId
 		});
+		if (reactionId === 0) {
+			const chip = await Chip.findOne({ where: { id: chipId } });
+			await Chip.update({ dislikeCount: chip.dislikeCount + 1 });
+		}
+		if (reactionId === 1) {
+			const chip = await Chip.findOne({ where: { id: chipId } });
+			await Chip.update({ likeCount: chip.likeCount + 1 });
+		}
 		res.status(201).send(newChipReaction);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
@@ -43,6 +51,30 @@ const UpdateChipReaction = async (req, res) => {
 			where: { id: chipReactionId },
 			returning: true
 		});
+		if (req.params.reactionId === 0) {
+			const chip = await Chip.findOne({
+				where: { id: req.params.chipId }
+			});
+			await Chip.update(
+				{
+					dislikeCount: chip.dislikeCount + 1,
+					likeCount: chip.likeCount - 1
+				},
+				{ where: { id: chip.id } }
+			);
+		}
+		if (req.params.reactionId === 1) {
+			const chip = await Chip.findOne({
+				where: { id: req.params.chipId }
+			});
+			await Chip.update(
+				{
+					likeCount: chip.likeCount + 1,
+					dislikeCount: chip.dislikeCount - 1
+				},
+				{ where: { id: chip.id } }
+			);
+		}
 		res.status(200).send(updatedChipReaction);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
@@ -52,6 +84,32 @@ const UpdateChipReaction = async (req, res) => {
 const DeleteChipReactionByChipReactionId = async (req, res) => {
 	try {
 		const chipReactionId = parseInt(req.params.chipReactionId);
+		const chipReaction = await ChipReaction.findOne({
+			where: { id: chipReactionId }
+		});
+		const chip = await Chip.findOne({ where: { id: chipReaction.chipId } });
+		if (chipReaction.reactionId === 0) {
+			const chip = await Chip.findOne({
+				where: { id: req.params.chipId }
+			});
+			await Chip.update(
+				{
+					dislikeCount: chip.dislikeCount - 1
+				},
+				{ where: { id: chip.id } }
+			);
+		}
+		if (chipReaction.reactionId === 1) {
+			const chip = await Chip.findOne({
+				where: { id: req.params.chipId }
+			});
+			await Chip.update(
+				{
+					likeCount: chip.likeCount - 1
+				},
+				{ where: { id: chip.id } }
+			);
+		}
 		await ChipReaction.destroy({ where: { id: chipReactionId } });
 		res.status(200).send({
 			message: `Deleted Chip Reaction with an id of ${chipReactionId}`
