@@ -51,6 +51,14 @@ describe('Chip location model test', () => {
 				chipId: testChip.id,
 				locationId: testLocation.id
 			});
+
+			expect(testChipLocation).toHaveProperty('id');
+			expect(testChipLocation).toHaveProperty('userId', testUser.id);
+			expect(testChipLocation).toHaveProperty('chipId', testChip.id);
+			expect(testChipLocation).toHaveProperty(
+				'locationId',
+				testLocation.id
+			);
 		} catch (error) {
 			console.error('Error creating test chip location:', error);
 		}
