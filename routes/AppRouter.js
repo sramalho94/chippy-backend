@@ -8,6 +8,7 @@ const ChipReactionRouter = require('./ChipReactionRouter');
 const CommentRouter = require('./CommentRouter');
 const LocationRouter = require('./LocationRouter');
 const UserAchievementRouter = require('./UserAchievementRouter');
+const CommentRemarkRouter = require('./CommentRemarkRouter')
 
 Router.use('/auth', AuthRouter);
 Router.use('/users', UserRouter);
@@ -17,6 +18,8 @@ Router.use('/chip-reactions', ChipReactionRouter);
 Router.use('/comments', CommentRouter);
 Router.use('/locations', LocationRouter);
 Router.use('/user-achievements', UserAchievementRouter);
-Router.use('/achievements', AchievementRouter)
+Router.use('/achievements', AchievementRouter);
+Router.use('/comment-remarks', CommentRemarkRouter)
+
 
 module.exports = Router;
