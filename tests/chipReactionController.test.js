@@ -59,24 +59,22 @@ describe('Chip reaction controller tests', () => {
 
 	test('Get chip reaction by userId', async () => {
 		const response = await request(app).get(
-			`/api/chip-reactions/${testUser.id}`
+			`/api/chip-reactions/user/${testUser.id}`
 		);
 		expect(response.statusCode).toBe(200);
-		expect(response.body).toHaveProperty('id');
-		expect(response.body.userId).toBe(testUser.id);
-		expect(response.body.chipId).toBe(testChip.id);
-		expect(response.body.reactionId).toBe(0);
+		expect(response.body[0].userId).toBe(testUser.id);
+		expect(response.body[0].chipId).toBe(testChip.id);
+		expect(response.body[0].reactionId).toBe(0);
 	});
 
 	test('Get chip reaction by chipId', async () => {
 		const response = await request(app).get(
-			`/api/chip-reactions/${testChip.id}`
+			`/api/chip-reactions/chip/${testChip.id}`
 		);
 		expect(response.statusCode).toBe(200);
-		expect(response.body).toHaveProperty('id');
-		expect(response.body.userId).toBe(testUser.id);
-		expect(response.body.chipId).toBe(testChip.id);
-		expect(response.body.reactionId).toBe(0);
+		expect(response.body[0].userId).toBe(testUser.id);
+		expect(response.body[0].chipId).toBe(testChip.id);
+		expect(response.body[0].reactionId).toBe(0);
 	});
 
 	test('Update chip reaction by chipReactionId', async () => {
@@ -86,11 +84,11 @@ describe('Chip reaction controller tests', () => {
 			.send({
 				reactionId: 1
 			});
+		console.log(response.body);
 		expect(response.statusCode).toBe(200);
-		expect(response.body).toHaveProperty('id');
-		expect(response.body.userId).toBe(testUser.id);
-		expect(response.body.chipId).toBe(testChip.id);
-		expect(response.body.reactionId).toBe(1);
+		expect(response.body[1][0].userId).toBe(testUser.id);
+		expect(response.body[1][0].chipId).toBe(testChip.id);
+		expect(response.body[1][0].reactionId).toBe(1);
 	});
 
 	test('Delete chip reaction by chipReactionId', async () => {

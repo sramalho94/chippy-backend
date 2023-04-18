@@ -30,15 +30,24 @@ const PostChipReaction = async (req, res) => {
 			userId,
 			reactionId
 		});
+		const createdChipReaction = await ChipReaction.findOne({
+			where: { userId: userId, chipId: chipId }
+		});
 		if (reactionId === 0) {
 			const chip = await Chip.findOne({ where: { id: chipId } });
-			await Chip.update({ dislikeCount: chip.dislikeCount + 1 });
+			await Chip.update(
+				{ dislikeCount: chip.dislikeCount + 1 },
+				{ where: { id: chipId } }
+			);
 		}
 		if (reactionId === 1) {
 			const chip = await Chip.findOne({ where: { id: chipId } });
-			await Chip.update({ likeCount: chip.likeCount + 1 });
+			await Chip.update(
+				{ likeCount: chip.likeCount + 1 },
+				{ where: { id: chipId } }
+			);
 		}
-		res.status(201).send(newChipReaction);
+		res.status(201).send(createdChipReaction);
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
@@ -89,9 +98,6 @@ const DeleteChipReactionByChipReactionId = async (req, res) => {
 		});
 		const chip = await Chip.findOne({ where: { id: chipReaction.chipId } });
 		if (chipReaction.reactionId === 0) {
-			const chip = await Chip.findOne({
-				where: { id: req.params.chipId }
-			});
 			await Chip.update(
 				{
 					dislikeCount: chip.dislikeCount - 1
@@ -100,9 +106,6 @@ const DeleteChipReactionByChipReactionId = async (req, res) => {
 			);
 		}
 		if (chipReaction.reactionId === 1) {
-			const chip = await Chip.findOne({
-				where: { id: req.params.chipId }
-			});
 			await Chip.update(
 				{
 					likeCount: chip.likeCount - 1
