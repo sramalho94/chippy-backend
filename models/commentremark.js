@@ -24,7 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'CommentRemark',
-      tableName: 'comment_remarks'
+      tableName: 'comment_remarks',
+      defaultScope: {
+        attributes: ['id', 'commentId', 'remarkId', 'createdAt', 'updatedAt']
+      }
     }
   )
   return CommentRemark
