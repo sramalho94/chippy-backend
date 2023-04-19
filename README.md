@@ -61,4 +61,4 @@ A Trello board was used to keep track of development progress and can be viewed 
 
 ### **_Future Updates_**
 
--   TBD
+-   [ ] Expand database to generalize chips to all types of snacks
