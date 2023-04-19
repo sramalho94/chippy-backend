@@ -24,6 +24,12 @@
 
 ### **_Description_**
 
+Chippy is a full-stack application that helps users locate unique snack products on the road.
+
+Users can post new snack products and where they located them. They can also react and comment on different snack products to share their reviews.
+
+The app was built with Next.js, Tailwind, and HTML on the frontend and Express, PostgreSQL, and Node.js on the backend.
+
 ---
 
 ### **_Getting Started_**
