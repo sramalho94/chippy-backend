@@ -32,20 +32,16 @@ describe('Chip reaction model test', () => {
 	});
 
 	test('Create a new chip reaction', async () => {
-		try {
-			testChipReaction = await ChipReaction.create({
-				userId: testUser.id,
-				chipId: testChip.id,
-				reactionId: 0
-			});
+		testChipReaction = await ChipReaction.create({
+			userId: testUser.id,
+			chipId: testChip.id,
+			reactionId: 0
+		});
 
-			expect(testChipReaction).toHaveProperty('id');
-			expect(testChipReaction).toHaveProperty('userId', testUser.id);
-			expect(testChipReaction).toHaveProperty('chipId', testChip.id);
-			expect(testChipReaction).toHaveProperty('reactionId', 0);
-		} catch (error) {
-			console.error('Error creating test chip reaction: ', error);
-		}
+		expect(testChipReaction).toHaveProperty('id');
+		expect(testChipReaction).toHaveProperty('userId', testUser.id);
+		expect(testChipReaction).toHaveProperty('chipId', testChip.id);
+		expect(testChipReaction).toHaveProperty;
 	});
 
 	afterAll(async () => {

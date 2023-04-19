@@ -37,7 +37,17 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			sequelize,
 			modelName: 'ChipReaction',
-			tableName: 'chip_reactions'
+			tableName: 'chip_reactions',
+			defaultScope: {
+				attributes: [
+					'id',
+					'chipId',
+					'userId',
+					'reactionId',
+					'createdAt',
+					'updatedAt'
+				]
+			}
 		}
 	);
 	return ChipReaction;
