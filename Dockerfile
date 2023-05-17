@@ -1,4 +1,5 @@
 FROM node:16
+# import node version 16
 
 # Install postgresql-client
 RUN apt-get update && \
