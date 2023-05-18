@@ -19,6 +19,6 @@ COPY . .
 COPY wait-for-postgres.sh /usr/local/bin/wait-for-postgres.sh
 RUN chmod +x /usr/local/bin/wait-for-postgres.sh
 
-EXPOSE 3000
+EXPOSE 3001
 
 CMD ["sh", "-c", "wait-for-postgres.sh $DB_HOST && npm run start:$NODE_ENV"]
